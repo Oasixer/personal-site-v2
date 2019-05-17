@@ -9,18 +9,51 @@ window.onload = function() {
   // Create 2-5 constellations
   var minConst = 2;
   var maxConst = 5;
-  var minStarsPerConst = 5;
-  var maxStarsPerConst = 8;
+  var minStarsPerConst = 7;
+  var maxStarsPerConst = 45;
   var maxStarRadius = 3;
-  var maxConstRadius = 0.4 * (Math.min(window.innerWidth, window.innerHeight));
-  var starDelay = 400;
+  var maxConstRadius = 0.3 * (Math.min(window.innerWidth, window.innerHeight));
+  var starDelay = 100;
   var lineDrawChance = 0.5;
 
+  var randomizeConsts = false;
+  var randomizeConstRadius = true;
+  var fixedConsts = [];
+  var lastConst = 0; // set automatically
+
   function draw() {
-    var numConst = Math.random() * (maxConst - minConst) + minConst;
     context.clearRect(0, 0, window.innerWidth, window.innerHeight);
     context.beginPath();
-    drawConstellations(numConst);
+
+    if (randomizeConsts) {
+      alert("hi");
+      var numConst = Math.random() * (maxConst - minConst) + minConst;
+      drawConstellations(numConst);
+    } else {
+      var left = window.innerWidth * 0.25;
+      var left2 = window.innerWidth * 0.15;
+      var right = window.innerWidth * 0.75;
+      var right2 = window.innerWidth * 0.85;
+      var middle = window.innerWidth * 0.5;
+      var top = window.innerHeight * 0.25;
+      var top2 = window.innerHeight * 0.15;
+      var bot = window.innerHeight * 0.75;
+      // var posTL = {x : left, y : top, size: 0.7};
+      var posTL2 = {x : left2, y : top, size : 0.7};
+      // var posTR = {x : right, y : top};
+      var posTR2 = {x : right2, y : top, size : 0.7};
+      var posT2M = {x : middle, y : top2, size : 0.5};
+      var posBL = {x : left, y : bot, size : 1};
+      var posBR = {x : right, y : bot, size : 1};
+      fixedConsts = [];
+      fixedConsts.push(posBL);
+      fixedConsts.push(posBR);
+      fixedConsts.push(posTL2);
+      fixedConsts.push(posTR2);
+      fixedConsts.push(posT2M);
+      numConst = fixedConsts.length;
+      drawConstellations(numConst);
+    }
   }
 
   function drawConstellations(numConst) {
@@ -28,10 +61,22 @@ window.onload = function() {
       draw();
       return;
     }
-    var constRadius = maxConstRadius * (Math.random() * 0.9 + 0.1);
-    var x = Math.random() * (window.innerWidth - constRadius * 2) + constRadius;
-    var y =
-        Math.random() * (window.innerHeight - constRadius * 2) + constRadius;
+    var constRadius = maxConstRadius * (Math.random() * 0.8 + 0.2);
+
+    var x = 0;
+    var y = 0;
+    if (randomizeConsts) {
+      x = Math.random() * (window.innerWidth - constRadius * 2) + constRadius;
+      y = Math.random() * (window.innerHeight - constRadius * 2) + constRadius;
+    } else {
+      x = fixedConsts[numConst - 1].x;
+      y = fixedConsts[numConst - 1].y;
+      if (randomizeConstRadius) {
+        constRadius *= fixedConsts[numConst - 1].size;
+      } else {
+        constRadius = maxConstRadius * fixedConsts[numConst - 1].size;
+      }
+    }
     var numStars = Math.random() * (maxStarsPerConst - minStarsPerConst) +
                    minStarsPerConst;
     drawStars(numStars, numConst, constRadius, x, y, []);
