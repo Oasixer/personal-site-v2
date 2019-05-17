@@ -3,20 +3,30 @@ html {
 
 #name {
   color: white;
+  margin: auto;
+  text-align: center;
+  /*font-size: 6.0vmin;*/
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; }
 
 #banner {
   position: absolute;
+  display:flex;
+  flex-direction: column;
   top: 25%;
   left: 50%;
+  width: 80%;
+ 
   -webkit-transform: translate(-50%, -25%);
   -moz-transform: translate(-50%, -25%);
   -ms-transform: translate(-50%, -25%);
   -o-transform: translate(-50%, -25%);
-  transform: translate(-50%, -25%); }
+  transform: translate(-50%, -25%);}
 
-#stuff {
+#buttons {
   display: flex;
+  flex-direction: column;
+  /*
+  align-content: center;
   justify-content: center;
   position: absolute;
   left: 50%;
@@ -25,7 +35,50 @@ html {
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
-  width: 100%; }
+  width: 100%; */}
+
+#top {
+  display: flex;
+  margin: auto;
+  /*
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);*/
+  /*width: 100%;*/ }
+
+#bot {
+  display: flex;
+  margin: auto;
+  /*
+  justify-content: center;
+  align-content: center;
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  width: 100%; */}
+
+#portfolio {
+  background-color: #FFFFFF /*#B6B6B6*/;/*#4CAF50*/
+  border: none;
+  border-radius: 8px;
+  color: #262626;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+}
 
 #email {
   margin-right: 2.5vmax;
